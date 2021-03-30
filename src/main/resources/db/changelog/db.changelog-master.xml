@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create_project_and_entry_tables" author="trohovsky">
+        <createTable tableName="project">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="start_date" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="end_date" type="date" />
+        </createTable>
+        <createTable tableName="entry">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="project_id" type="int">
+                <constraints references="project(id)" foreignKeyName="fk_entry_project" nullable="false"
+                             deleteCascade="true" />
+            </column>
+            <column name="entry_date" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="time_spent" type="float">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="varchar(255)" />
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

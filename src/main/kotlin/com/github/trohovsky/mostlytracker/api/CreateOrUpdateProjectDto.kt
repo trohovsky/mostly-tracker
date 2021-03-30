@@ -1,0 +1,9 @@
+package com.github.trohovsky.mostlytracker.api
+
+import java.time.LocalDate
+
+data class CreateOrUpdateProjectDto(
+    override val name: String,
+    override val startDate: LocalDate,
+    override val endDate: LocalDate? = null,
+) : ProjectBaseDto()
